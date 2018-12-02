@@ -1,0 +1,3 @@
+* vedic-math-mode
+
+#+INCLUDE: "~/.emacs.d/extra/vedic-math-mode/vedic-math-mode.el" :lines "1-52"
