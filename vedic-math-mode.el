@@ -35,6 +35,8 @@
 ;; (setq vm/operators '("+" "-"))
 
 ;;; Todo (someday maybe):
+;; - reset go back
+;; - toggle vert-horz
 ;; - add algebra problems
 ;; - track time
 ;; - save statistics
@@ -65,6 +67,17 @@
 
 (defvar vm/show-horz-format t
   "bool whether to use horizontal or vertical format")
+
+(defcustom vm/eqn-disp-mode-face
+  '(:height 500)
+  "Face for vm/eqn-disp-mode")
+
+(defun vm/set-buffer-face-eqn-disp-mode-face ()
+  "sets vm/eqn-disp-mode-face"
+  (let ((buffer-face-mode-face vm/eqn-disp-mode-face))
+    (buffer-face-mode)))
+(add-hook 'vm/equation-display-mode-hookpp
+          'vm/set-buffer-face-eqn-disp-mode-face)
 
 (defun vm/ndigit-random (n)
   "return random integer with n digits"
@@ -128,7 +141,6 @@
     (erase-buffer)
     (insert expr)
     (insert res)
-    ;; (add-text-properties (point) (- (point) reslen) '(invisible t))
     (put-text-property (point) (- (point) reslen) 'invisible t)
     (backward-char reslen)))
 
@@ -145,17 +157,21 @@
         (p1 (point))
         (p2 (1+ (point))))
     (message "yeah, nailed it")
+    (remove-overlays p1 p2)
     (put-text-property p1 p2 'invisible nil)
     (add-face-text-property p1 p2 '(:foreground "green"))
-    (forward-char)))
+    (forward-char)
+    (when (eq (point) (point-max))
+      (vm/equation))))
 
 (defun vm/char-incorrect ()
   "do stuff if input char is incorrect"
   (let ((buffer-read-only nil)
         (p1 (point))
-        (p2 (1+ (point)))))
-  (message "wrong, try again")
-  (add-face-text-property p1 p2 '(:foreground "red")))
+        (p2 (1+ (point))))
+    (message "wrong, try again")
+    (overlay-put (make-overlay p1 p2) 'display "⚡")
+    (overlay-put (make-overlay p1 p2) 'face '(:foreground "red"))))
 
 (defun vm/check-answer ()
   "check whether input char via keypress and call corresponding response func"
@@ -164,15 +180,21 @@
       (vm/char-correct)
     (vm/char-incorrect)))
 
+(defun vm/reveal-correct-digit ()
+  "make correct digit visible"
+  (let ((buffer-read-only nil)
+        (p1 (point))
+        (p2 (1+ (point))))
+    (remove-overlays p1 p2)
+    (put-text-property p1 p2 'invisible nil)))
+
 (defvar vm/equation-display-mode-map
   (let ((map (make-sparse-keymap)))
-    ;; treat prefix-arguments as normal chars
-    (suppress-keymap map t)
+    (suppress-keymap map t)         ;treat prefix-args as normal chars
     (define-key map "n" 'vm/equation)
-    (mapc (lambda (x)
-            (define-key map (char-to-string x)
-              'vm/check-answer))
+    (mapc (lambda (x) (define-key map (char-to-string x) 'vm/check-answer))
           "-0123456789")
+    (define-key map "r" 'vm/reveal)
     map)
   "The key map for the #<*vedic-math*> buffer.")
 
@@ -180,5 +202,11 @@
   "vm/eqn-disp-mode"
   "major-mode for the equation display buffer opened by #`vm/equation
   from vedic-maths package")
+
+
+(setq vm/ndigits '((+ 3 (random 4)) (+ 2 (random 2))))
+(setq vm/show-horz-format '(vm/random-bool))
+(setq vm/operators '("+" "-"))
+(bind-key "<f1>" 'vm/equation)
 
 (provide 'vedic-math-mode)
