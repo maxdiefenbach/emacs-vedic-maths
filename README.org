@@ -1,3 +1,17 @@
-* vedic-math-mode
+#+TITLE: README
+#+DATE:
+#+AUTHOR: Max Diefenbach
+#+EMAIL: maxdiefenbach@protonmail.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:nil todo:t |:t
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.1 (Org mode 9.1.14)
 
-#+INCLUDE: "~/.emacs.d/extra/vedic-math-mode/vedic-math-mode.el" :lines "1-52"
+* vedic-maths-mode
+
+#+INCLUDE: "./vedic-maths-mode.el" :lines "1-55" verbatim

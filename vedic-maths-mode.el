@@ -1,9 +1,9 @@
-;;; verdic-math-mode.el --- train your mental math skills
+;;; verdic-maths-mode.el --- train your mental math skills
 
 ;; Copyright (C) 2018 Maximilian N. Diefenbach
 
 ;; Author: Max Diefenbach <maxdiefenbach@protonmail.com>
-;; URL: https://github.com/maxdiefenbach/emacs-vedic-math
+;; URL: https://github.com/maxdiefenbach/emacs-vedic-maths
 ;; Package-Version: 20181208
 ;; Version: 0.0.2
 ;; Keywords: vedic maths, mental math, calc
@@ -38,7 +38,7 @@
 ;; (bind-key "<f1>" 'vm/new-equation)
 
 ;;; Todo (someday maybe):
-;; - reset go back
+;; - reset, go back
 ;; - add algebra problems
 ;; - track time
 ;; - save statistics
@@ -58,24 +58,24 @@
 
 (defcustom vm/operators '("+" "-" "*" "/")
   "mathematical operators"
-  :group 'vedic-math)
+  :group 'vedic-maths)
 
 (defcustom vm/expr-format "%s%s%s%s%s%s%s%s"
   "prefix-operand1-separator-operator-separator-operand2-postfix"
-  :group 'vedic-math)
+  :group 'vedic-maths)
 
 (defcustom vm/ndigits '(3 2)
   "number of digits for first and second operand"
-  :group 'vedic-math)
+  :group 'vedic-maths)
 
 (defcustom vm/show-horz-format t
   "bool whether to use horizontal or vertical format"
-  :group 'vedic-math)
+  :group 'vedic-maths)
 
 (defcustom vm/eqn-disp-mode-face
   '(:height 500)
   "Face for vm/eqn-disp-mode"
-  :group 'vedic-math)
+  :group 'vedic-maths)
 
 (defvar vm/eqn
   '(pre "" post "" op "" op1 "" op2 "" sep1 "" sep2 "" res "" isvert t)
@@ -294,4 +294,4 @@ by changing properties of the plist vm-eqn"
 ;;       (vm/toggle-vert-horz vm-eqn))
 ;;     vm-eqn))
 
-(provide 'vedic-math-mode)
+(provide 'vedic-maths-mode)

@@ -1,21 +1,16 @@
 
-# Table of Contents
 
-1.  [vedic-math-mode](#orgfc30c94)
+# vedic-maths-mode
 
-
-<a id="orgfc30c94"></a>
-
-# vedic-math-mode
-
-;;; verdic-math-mode.el &#x2014; train your mental math skills
+<div class="verbatim">
+;;; verdic-maths-mode.el &#x2014; train your mental math skills
 
 ;; Copyright (C) 2018 Maximilian N. Diefenbach
 
 ;; Author: Max Diefenbach <maxdiefenbach@protonmail.com>
-;; URL: <https://github.com/maxdiefenbach/emacs-vedic-math>
-;; Package-Version: 20181201
-;; Version: 0.0.1
+;; URL: <https://github.com/maxdiefenbach/emacs-vedic-maths>
+;; Package-Version: 20181208
+;; Version: 0.0.2
 ;; Keywords: vedic maths, mental math, calc
 
 ;; This file is not part of GNU Emacs
@@ -36,20 +31,22 @@
 ;;; Commentary:
 ;;
 ;; A simple package to train mental calculation with vedic maths.
-;; It defines an entry function (vm/equation) that opens a buffer in
-;; (vm/eqn-disp-mode) showing a math equation and asking for the solution.
+;; It defines an entry function (vm/new-equation) that opens a buffer
+;; **vedic-maths** in (vm/eqn-disp-mode) showing a math equation and
+;; asking for the solution.
 ;;
 ;; To define, which calculations to train, one can set the following variables:
 ;; (setq vm/ndigits '((random 5) (random 5)))
 ;; (setq vm/show-horz-format '(vm/random-bool))
 ;; (setq vm/operators '("+" "-"))
 
+;; (bind-key "<f1>" 'vm/new-equation)
+
 ;;; Todo (someday maybe):
+;; - reset, go back
 ;; - add algebra problems
 ;; - track time
 ;; - save statistics
-;; - define faces
-;; - layout buffer
 ;; - fix single digit display error (see known bugs)
 
 ;;; Known bugs:
@@ -59,3 +56,6 @@
 ;;        318497931                     1
 ;;      +          6                - 17
 ;;      ------&#x2013;&#x2014;        or       -&#x2014;
+;;      318497937                    -16
+
+</div>
